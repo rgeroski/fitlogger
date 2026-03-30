@@ -1749,20 +1749,24 @@ function buildMuscleCheckboxes() {
   ).join('');
 }
 
-function setupCheckboxLabels() {
-  document.querySelectorAll('.checkbox-label').forEach(label => {
-    label.addEventListener('click', function(e) {
-      if (e.target.tagName === 'INPUT') return;
-      const cb = this.querySelector('input');
+// Use event delegation on the modal — no per-element listeners needed
+(function() {
+  document.getElementById('exercise-modal').addEventListener('click', function(e) {
+    const label = e.target.closest('.checkbox-label');
+    if (!label) return;
+    // Prevent the default if clicking the label text (not the hidden input directly)
+    if (e.target.tagName !== 'INPUT') {
+      e.preventDefault();
+      const cb = label.querySelector('input');
       cb.checked = !cb.checked;
-      this.classList.toggle('checked', cb.checked);
-    });
-    const cb = label.querySelector('input');
-    if (cb) cb.addEventListener('change', function() {
-      label.classList.toggle('checked', this.checked);
-    });
+    }
+    // Sync visual state on next tick (after checkbox state settles)
+    setTimeout(() => {
+      const cb = label.querySelector('input');
+      label.classList.toggle('checked', cb.checked);
+    }, 0);
   });
-}
+})();
 
 function openExerciseModal(exId) {
   buildMuscleCheckboxes();
@@ -1803,7 +1807,6 @@ function openExerciseModal(exId) {
     delBtn.style.display = 'none';
   }
 
-  setupCheckboxLabels();
   modal.classList.add('active');
 }
 
