@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fitlogger — Workout Tracker</title>
+<title>RayFit Logger — Workout Tracker</title>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -824,7 +824,7 @@ input, select, textarea { font-family: var(--font-body); }
 <!-- ═══════ LOGIN SCREEN ═══════ -->
 <div class="login-screen" id="login-screen">
   <div class="login-card">
-    <div class="login-logo">Fit<span>logger</span></div>
+    <div class="login-logo">RayFit<span> Logger</span></div>
     <div class="login-subtitle">Select your profile or create a new one</div>
 
     <!-- Google Sheets Connection (shown when no URL is configured) -->
@@ -874,7 +874,7 @@ input, select, textarea { font-family: var(--font-body); }
 <!-- ═══════ MAIN APP ═══════ -->
 <header class="app-header hidden" id="app-header">
   <div class="header-left">
-    <div class="logo">Fit<span>logger</span></div>
+    <div class="logo">RayFit<span> Logger</span></div>
     <button class="user-badge" onclick="logout()" title="Switch user">
       <div class="mini-avatar" id="header-avatar"></div>
       <span id="header-username"></span> &#9662;
@@ -1902,7 +1902,7 @@ function exportData() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'fitlogger_' + currentUser + '_' + dateKey(new Date()) + '.json';
+  a.download = 'rayfit_' + currentUser + '_' + dateKey(new Date()) + '.json';
   a.click();
   URL.revokeObjectURL(url);
   toast('Data exported!');
